@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angie Spa & Cuts | Relax. Refresh. Redefine your look.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #D4A373;
+            --secondary: #2C2C2C;
+            --accent: #F2EFEA;
+            --highlight: #E3842B;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--accent);
+            color: var(--secondary);
+            overflow-x: hidden;
+        }
+        
+        /* Page container */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Non-rectangular shapes */
+        .organic-shape {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        
+        .bubble-shape {
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+        
+        .leaf-shape {
+            border-radius: 80% 15% 55% 50% / 55% 15% 80% 50%;
+        }
+        
+        .wave-shape {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+            background: rgba(242, 239, 234, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header.scrolled {
+            background: rgba(212, 163, 115, 0.95);
+            padding: 15px 5%;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--highlight);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover:after, 
+        nav ul li a.active:after {
+            width: 100%;
+        }
+        
+        .book-btn {
+            background: var(--highlight);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .book-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(227, 132, 43, 0.4);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            position: relative;
+            margin-top: 80px;
+        }
+        
+        .hero-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spa-section {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+        
+        .cuts-section {
+            background: linear-gradient(135deg, var(--secondary), #444);
+        }
+        
+        .hero-image {
+            width: 80%;
+            height: 60%;
+            object-fit: cover;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+        
+        .hero-image:hover {
+            transform: scale(1.03);
+            border-radius: 40% 60% 70% 30% / 40% 70% 30% 60%;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            margin: 30px 0;
+            text-align: center;
+            color: var(--secondary);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .cuts-section .hero-title {
+            color: white;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .cta-btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .spa-btn {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .cuts-btn {
+            background: var(--highlight);
+            color: white;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 100px 5%;
+            background: var(--accent);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+        
+        .service-card:hover:before {
+            transform: scaleX(1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+        
+        .service-card:hover .service-icon {
+            background: var(--highlight);
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .service-price {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin: 15px 0;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            padding: 100px 5%;
+            background: linear-gradient(to bottom, var(--accent), white);
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 100px 5%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            height: 500px;
+            border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--secondary);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .about-text {
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .milestones {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .milestone {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+        
+        .milestone:hover {
+            transform: translateY(-10px);
+        }
+        
+        .milestone-year {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Booking Section */
+        .booking {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            text-align: center;
+            color: white;
+        }
+        
+        .booking-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .booking-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(212, 163, 115, 0.3);
+        }
+        
+        .service-select {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .service-option {
+            flex: 1;
+            padding: 15px;
+            background: var(--accent);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .service-option.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .confirmation-message {
+            display: none;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            color: #2e7d32;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 100px 5%;
+            background: var(--accent);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-name {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .product-price {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .product-btn {
+            background: var(--highlight);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+        
+        .product-btn:hover {
+            background: var(--primary);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 100px 5%;
+            background: white;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--secondary);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+        
+        .map-container {
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 80px 5% 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .hero-section {
+                padding: 80px 5%;
+                min-height: 80vh;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .about, .footer-content, .contact-container {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="logo">Angie <span>Spa & Cuts</span></div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a class="nav-link active" data-page="home">Home</a></li>
+                <li><a class="nav-link" data-page="about">About</a></li>
+                <li><a class="nav-link" data-page="services">Services</a></li>
+                <li><a class="nav-link" data-page="gallery">Gallery</a></li>
+                <li><a class="nav-link" data-page="booking">Booking</a></li>
+                <li><a class="nav-link" data-page="products">Products</a></li>
+                <li><a class="nav-link" data-page="contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="book-btn" data-page="booking">Book Now</button>
+        <div class="mobile-menu-btn" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-section spa-section">
+                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Spa Experience" class="hero-image">
+                <h1 class="hero-title">Indulge in Serenity</h1>
+                <div class="hero-cta">
+                    <button class="cta-btn spa-btn" data-page="services">Explore Spa Services</button>
+                </div>
+            </div>
+            <div class="hero-section cuts-section">
+                <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80" alt="Barber Experience" class="hero-image">
+                <h1 class="hero-title">Define Your Style</h1>
+                <div class="hero-cta">
+                    <button class="cta-btn cuts-btn" data-page="services">Explore Hair Services</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Highlights -->
+        <section class="services">
+            <h2 class="section-title">Our Premium Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="service-title">Spa Therapies</h3>
+                    <p>Relax and rejuvenate with our premium spa treatments designed for ultimate relaxation.</p>
+                    <div class="service-price">From KES 2,500</div>
+                    <button class="book-btn" data-page="booking">Book Now</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-massage"></i>
+                    </div>
+                    <h3 class="service-title">Massage</h3>
+                    <p>Swedish, Deep Tissue, and Aromatherapy massages to relieve stress and tension.</p>
+                    <div class="service-price">From KES 3,000</div>
+                    <button class="book-btn" data-page="booking">Book Now</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3 class="service-title">Haircuts</h3>
+                    <p>Expert cuts and styling for both men and women to redefine your look.</p>
+                    <div class="service-price">From KES 1,200</div>
+                    <button class="book-btn" data-page="booking">Book Now</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Preview -->
+        <section class="gallery">
+            <h2 class="section-title">Transformations Gallery</h2>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1596704014031-8e4b01f14c2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Spa Treatment">
+                    <div class="gallery-overlay">
+                        <h3>Relaxing Spa Treatment</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Hair Styling">
+                    <div class="gallery-overlay">
+                        <h3>Professional Hair Styling</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Facial Treatment">
+                    <div class="gallery-overlay">
+                        <h3>Revitalizing Facial</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1594736797933-d0ea3ff8db41?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Beard Grooming">
+                    <div class="gallery-overlay">
+                        <h3>Precision Beard Grooming</h3>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="book-btn" data-page="gallery" style="padding: 12px 30px;">View Full Gallery</button>
+            </div>
+        </section>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page">
+        <div class="about">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="About Angie Spa & Cuts">
+            </div>
+            <div class="about-content">
+                <h2 class="about-title">Our Story</h2>
+                <p class="about-text">Angie Spa & Cuts was founded in 2020 with a vision to create a sanctuary where clients could experience both relaxation and style under one roof. Our mission is to provide premium spa and grooming services that help our clients relax, refresh, and redefine their look.</p>
+                <p class="about-text">In 2023, we expanded our services to include a dedicated barber station, creating a unique dual experience that caters to both spa enthusiasts and those seeking precision cuts and grooming.</p>
+                <p class="about-text">Our team of certified professionals is dedicated to providing exceptional service in a welcoming and luxurious environment. We continuously train in the latest techniques and use only premium products to ensure the best results for our clients.</p>
+                
+                <div class="milestones">
+                    <div class="milestone">
+                        <div class="milestone-year">2020</div>
+                        <div class="milestone-text">Founded</div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-year">2022</div>
+                        <div class="milestone-text">Expanded Team</div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-year">2023</div>
+                        <div class="milestone-text">Dual Spa & Cuts</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="services" style="background: white;">
+            <h2 class="section-title">Meet Our Team</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="service-title">Angela Mwangi</h3>
+                    <p>Founder & Head Spa Therapist</p>
+                    <p>With over 10 years of experience in wellness and beauty, Angela ensures every client receives personalized care.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="service-title">David Ochieng</h3>
+                    <p>Master Barber</p>
+                    <p>Specializing in modern cuts and traditional grooming, David brings precision and style to every appointment.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="service-title">Grace Wambui</h3>
+                    <p>Senior Esthetician</p>
+                    <p>Grace's expertise in skincare and facials has helped hundreds of clients achieve their beauty goals.</p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Services Page -->
+    <section id="services" class="page">
+        <section class="services">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="service-title">Spa Therapies</h3>
+                    <p>Relax and rejuvenate with our premium spa treatments designed for ultimate relaxation.</p>
+                    <div class="service-price">From KES 2,500</div>
+                    <button class="book-btn" data-page="booking">Book Now</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-massage"></i>
+                    </div>
+                    <h3 class="service-title">Massage</h3>
+                    <p>Swedish, Deep Tissue, and Aromatherapy massages to relieve stress and tension.</p>
+                    <div class="service-price">From KES 3,000</div>
+                    <button class="book-btn" data-page="booking">Book Now</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3 class="service-title">Haircuts</h3>
+                    <p>Expert cuts and styling for both men and women to redefine your look.</p>
+                    <div class="service-price">From KES 1,200</div>
+                    <button class="book-btn" data-page="booking">Book Now</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="service-title">Grooming</h3>
+                    <p>Complete grooming services including beard trims and styling for the modern gentleman.</p>
+                    <div class="service-price">From KES 1,500</div>
+                    <button class="book-btn" data-page="booking">Book Now</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hand-sparkles"></i>
+                    </div>
+                    <h3 class="service-title">Facials</h3>
+                    <p>Revitalize your skin with our professional facial treatments and skincare solutions.</p>
+                    <div class="service-price">From KES 2,800</div>
+                    <button class="book-btn" data-page="booking">Book Now</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hand-holding-water"></i>
+                    </div>
+                    <h3 class="service-title">Manicure & Pedicure</h3>
+                    <p>Pamper your hands and feet with our luxurious nail care services.</p>
+                    <div class="service-price">From KES 2,000</div>
+                    <button class="book-btn" data-page="booking">Book Now</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3 class="service-title">Hot Stone Therapy</h3>
+                    <p>Experience deep muscle relaxation with our therapeutic hot stone massage.</p>
+                    <div class="service-price">KES 4,500</div>
+                    <button class="book-btn" data-page="booking">Book Now</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="service-title">Hair Coloring</h3>
+                    <p>Transform your look with professional hair coloring services using premium products.</p>
+                    <div class="service-price">From KES 3,500</div>
+                    <button class="book-btn" data-page="booking">Book Now</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="booking" style="background: linear-gradient(135deg, var(--secondary), #444);">
+            <h2 class="booking-title">Packages & Memberships</h2>
+            <p class="booking-subtitle">Enjoy our specially curated packages for the ultimate wellness experience</p>
+            
+            <div class="services-grid" style="max-width: 1000px; margin: 0 auto;">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="service-title">Royal Treatment</h3>
+                    <p>Full body massage, facial, manicure & pedicure</p>
+                    <div class="service-price">KES 8,500</div>
+                    <p style="font-size: 0.9rem; margin: 10px 0;">(Save KES 1,500)</p>
+                    <button class="book-btn" data-page="booking">Book Package</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="service-title">Gentleman's Package</h3>
+                    <p>Haircut, beard trim, facial, and massage</p>
+                    <div class="service-price">KES 6,500</div>
+                    <p style="font-size: 0.9rem; margin: 10px 0;">(Save KES 1,200)</p>
+                    <button class="book-btn" data-page="booking">Book Package</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3 class="service-title">Monthly Membership</h3>
+                    <p>2 spa treatments + 2 haircuts per month</p>
+                    <div class="service-price">KES 12,000/month</div>
+                    <p style="font-size: 0.9rem; margin: 10px 0;">(Save up to 30%)</p>
+                    <button class="book-btn" data-page="booking">Join Now</button>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Gallery Page -->
+    <section id="gallery" class="page">
+        <section class="gallery">
+            <h2 class="section-title">Our Gallery</h2>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1596704014031-8e4b01f14c2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Spa Treatment">
+                    <div class="gallery-overlay">
+                        <h3>Relaxing Spa Treatment</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Hair Styling">
+                    <div class="gallery-overlay">
+                        <h3>Professional Hair Styling</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Facial Treatment">
+                    <div class="gallery-overlay">
+                        <h3>Revitalizing Facial</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1594736797933-d0ea3ff8db41?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Beard Grooming">
+                    <div class="gallery-overlay">
+                        <h3>Precision Beard Grooming</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1633158829556-8ef6f7a4e31b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Massage Therapy">
+                    <div class="gallery-overlay">
+                        <h3>Therapeutic Massage</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1562142404-59b8fc107ff4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Hair Coloring">
+                    <div class="gallery-overlay">
+                        <h3>Expert Hair Coloring</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Nail Care">
+                    <div class="gallery-overlay">
+                        <h3>Luxury Nail Care</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1593705114312-a0ee03a3f7d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Spa Interior">
+                    <div class="gallery-overlay">
+                        <h3>Our Serene Space</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Booking Page -->
+    <section id="booking" class="page">
+        <section class="booking">
+            <h2 class="booking-title">Book Your Experience</h2>
+            <p class="booking-subtitle">From calm to confidence — all in one place. Schedule your appointment today and let our experts help you relax, refresh, and redefine your look.</p>
+            
+            <div class="booking-form">
+                <div class="service-select">
+                    <div class="service-option active" data-service="spa">Spa Services</div>
+                    <div class="service-option" data-service="cuts">Hair Services</div>
+                </div>
+                
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Your Phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Type</label>
+                        <select id="service" class="form-control" required>
+                            <option value="">Select a Service</option>
+                            <optgroup label="Spa Services" id="spa-services">
+                                <option value="massage">Massage (From KES 3,000)</option>
+                                <option value="facial">Facial (From KES 2,800)</option>
+                                <option value="spa-therapy">Spa Therapy (From KES 2,500)</option>
+                                <option value="manicure-pedicure">Manicure & Pedicure (From KES 2,000)</option>
+                                <option value="hot-stone">Hot Stone Therapy (KES 4,500)</option>
+                                <option value="royal-package">Royal Treatment Package (KES 8,500)</option>
+                            </optgroup>
+                            <optgroup label="Hair Services" id="hair-services">
+                                <option value="haircut">Haircut (From KES 1,200)</option>
+                                <option value="grooming">Grooming (From KES 1,500)</option>
+                                <option value="coloring">Hair Coloring (From KES 3,500)</option>
+                                <option value="gentleman-package">Gentleman's Package (KES 6,500)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Preferred Date</label>
+                            <input type="date" id="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Preferred Time</label>
+                            <input type="time" id="time" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Notes</label>
+                        <textarea id="message" class="form-control" rows="3" placeholder="Any special requests?"></textarea>
+                    </div>
+                    <button type="submit" class="book-btn" style="width: 100%; margin-top: 20px;">Book Appointment</button>
+                </form>
+                
+                <div class="confirmation-message" id="confirmation-message">
+                    <i class="fas fa-check-circle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                    <h3>Appointment Request Submitted!</h3>
+                    <p>Thank you for booking with Angie Spa & Cuts. We'll contact you shortly to confirm your appointment.</p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Products Page -->
+    <section id="products" class="page">
+        <section class="products">
+            <h2 class="section-title">Premium Products</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; line-height: 1.6;">Enhance your spa and grooming experience with our curated selection of premium products. All products are available for purchase at our location.</p>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1608248549165-861fdf43d571?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Aromatherapy Oil">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Lavender Aromatherapy Oil</h3>
+                        <p>Premium essential oil for relaxation and stress relief</p>
+                        <div class="product-price">KES 1,800</div>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1594736797933-d0ea3ff8db41?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Beard Oil">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Premium Beard Oil</h3>
+                        <p>Nourishing oil for beard growth and maintenance</p>
+                        <div class="product-price">KES 1,500</div>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Face Cream">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Hydrating Face Cream</h3>
+                        <p>Daily moisturizer with SPF protection</p>
+                        <div class="product-price">KES 2,200</div>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Hair Serum">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Revitalizing Hair Serum</h3>
+                        <p>Repair damaged hair and add shine</p>
+                        <div class="product-price">KES 2,500</div>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1570194065650-1d49aa48b6e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Body Scrub">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Exfoliating Body Scrub</h3>
+                        <p>Gentle exfoliation with natural ingredients</p>
+                        <div class="product-price">KES 1,900</div>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1180&q=80" alt="Aftershave">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Soothing Aftershave Balm</h3>
+                        <p>Calms skin after shaving with natural extracts</p>
+                        <div class="product-price">KES 1,600</div>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page">
+        <section class="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 class="contact-title">Visit Us</h3>
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <p><strong>Address</strong></p>
+                            <p>Kimathi House, Kimathi Street, Nairobi, Kenya</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <p><strong>Phone</strong></p>
+                            <p>+254 712 345 678</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p><strong>Email</strong></p>
+                            <p>info@angiespa.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <p><strong>Opening Hours</strong></p>
+                            <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
+                            <p>Saturday: 9:00 AM - 6:00 PM</p>
+                            <p>Sunday: 10:00 AM - 4:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.817476559159!2d36.8216093147539!3d-1.2826355990633623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d3b4e679b7%3A0x7d5a4b3c7b7c7b7c!2sKimathi%20House%2C%20Kimathi%20St%2C%20Nairobi%2C%20Kenya!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3 class="contact-title">Send Us a Message</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name">Your Name</label>
+                            <input type="text" id="contact-name" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email Address</label>
+                            <input type="email" id="contact-email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Subject</label>
+                            <input type="text" id="contact-subject" class="form-control" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="book-btn" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3 class="footer-title">Angie Spa & Cuts</h3>
+                <p>Kimathi House, Kimathi Street, Nairobi, Kenya</p>
+                <p>Email: info@angiespa.com</p>
+                <p>Phone: +254 712 345 678</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a class="nav-link" data-page="home">Home</a></li>
+                    <li><a class="nav-link" data-page="about">About Us</a></li>
+                    <li><a class="nav-link" data-page="services">Services</a></li>
+                    <li><a class="nav-link" data-page="gallery">Gallery</a></li>
+                    <li><a class="nav-link" data-page="booking">Booking</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Services</h3>
+                <ul class="footer-links">
+                    <li><a class="nav-link" data-page="services">Spa Therapies</a></li>
+                    <li><a class="nav-link" data-page="services">Massage</a></li>
+                    <li><a class="nav-link" data-page="services">Haircuts</a></li>
+                    <li><a class="nav-link" data-page="services">Grooming</a></li>
+                    <li><a class="nav-link" data-page="services">Facials</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Opening Hours</h3>
+                <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
+                <p>Saturday: 9:00 AM - 6:00 PM</p>
+                <p>Sunday: 10:00 AM - 4:00 PM</p>
+                <div style="margin-top: 20px;">
+                    <button class="book-btn" data-page="booking">Book Appointment</button>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Angie Spa & Cuts. All Rights Reserved. | Designed by FusionX</p>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set minimum date to today for booking form
+            const today = new Date();
+            const dateInput = document.getElementById('date');
+            const timeInput = document.getElementById('time');
+            
+            // Format date as YYYY-MM-DD
+            const formattedDate = today.toISOString().split('T')[0];
+            dateInput.min = formattedDate;
+            
+            // Set default time to next available slot (current time + 1 hour)
+            const nextHour = new Date(today.getTime() + 60 * 60 * 1000);
+            const hours = nextHour.getHours().toString().padStart(2, '0');
+            const minutes = nextHour.getMinutes().toString().padStart(2, '0');
+            timeInput.value = `${hours}:${minutes}`;
+            
+            // Navigation functionality
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const header = document.getElementById('header');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navMenu = document.getElementById('nav-menu');
+            
+            // Function to show a specific page
+            function showPage(pageId) {
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show the selected page
+                document.getElementById(pageId).classList.add('active');
+                
+                // Update active nav link
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Close mobile menu if open
+                navMenu.classList.remove('show');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+            
+            // Add click event to all navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    showPage(pageId);
+                });
+            });
+            
+            // Add click event to book buttons
+            document.querySelectorAll('.book-btn, .cta-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.getAttribute('data-page')) {
+                        const pageId = this.getAttribute('data-page');
+                        showPage(pageId);
+                    }
+                });
+            });
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('show');
+            });
+            
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Service selection in booking form
+            const serviceOptions = document.querySelectorAll('.service-option');
+            const spaServices = document.getElementById('spa-services');
+            const hairServices = document.getElementById('hair-services');
+            
+            serviceOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    serviceOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show/hide relevant service options
+                    if (this.getAttribute('data-service') === 'spa') {
+                        spaServices.style.display = 'block';
+                        hairServices.style.display = 'none';
+                    } else {
+                        spaServices.style.display = 'none';
+                        hairServices.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Booking form submission
+            const bookingForm = document.getElementById('booking-form');
+            const confirmationMessage = document.getElementById('confirmation-message');
+            
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // In a real application, you would send this data to a server
+                // For demo purposes, we'll just show a confirmation message
+                bookingForm.style.display = 'none';
+                confirmationMessage.style.display = 'block';
+                
+                // Reset form after 5 seconds (for demo)
+                setTimeout(function() {
+                    bookingForm.reset();
+                    bookingForm.style.display = 'block';
+                    confirmationMessage.style.display = 'none';
+                }, 5000);
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contact-form');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // In a real application, you would send this data to a server
+                // For demo purposes, we'll just show an alert
+                alert('Thank you for your message! We will get back to you soon.');
+                contactForm.reset();
+            });
+            
+            // Initialize service selection
+            document.querySelector('.service-option.active').click();
+        });
+    </script>
+</body>
+</html>
